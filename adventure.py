@@ -2,7 +2,7 @@
 
 import random
 
-inventory = list()
+inventory = list[]
 
 def display_player_status(player_health):
     """prints player's health"""
@@ -59,7 +59,6 @@ def combat_encounter(player_health, monster_health, has_treasure=bool):
             print("You defeated the monster!")
             return has_treasure
 
-
 def check_for_treasure(has_treasure):
     """checks for treasure"""
     if has_treasure is True:
@@ -85,29 +84,29 @@ def display_inventory(inventory):
 def enter_dungeon(player_health, inventory, dungeon_rooms):
     """ runs through each dungeon room """
     try:
-        dungeon_rooms[0] = ("A big hole", "Candy", "puzzle", ("Wow!", "Nope!", -10))
+        dungeon_rooms[0] = ("A big hole", "gold coins", "puzzle", ("Puzzle solved!", "Nope!", -10))
     except TypeError:
         print("Error: Cannot modify a tuple as they are immutable!")
     for dungeon_room in dungeon_rooms:   # used to go through each list within the tuple to use it
         print(dungeon_room[0])
-        if dungeon_room[1] != None:
+        if dungeon_room[1] is not None:
             acquire_item(inventory, dungeon_room[1])
-        if dungeon_room [2] == "puzzle":
+        if dungeon_room [2] is "puzzle":
             print("You encounter a puzzle!")
             puzzle_input = input("Solve or skip the puzzle?")
             successA = True
-            if puzzle_input == "solve":
+            if puzzle_input is "solve":
                 successA = random.choice([True, False])
             if successA is True:
                 print(dungeon_room[3][0])
                 player_health += dungeon_room[3][2]
             else:
                 print(dungeon_room[3][1])
-        elif dungeon_room [2] == "trap":
+        elif dungeon_room [2] is "trap":
             print("You see a potential trap!")
             trap_input = input("Disarm or bypass the trap?")
             successB = True
-            if trap_input == "Disarm":
+            if trap_input is "Disarm":
                 successB = random.choice([True, False])
             if successB is True:
                 print(dungeon_room[3][0])
@@ -117,7 +116,6 @@ def enter_dungeon(player_health, inventory, dungeon_rooms):
             print("There doesn't seem to be a challenge in this room. You move on.")
     
     return (player_health, inventory)
-   
 
 def main():
     """runs program with other functions"""
@@ -135,7 +133,6 @@ def main():
     has_treasure = random.choice([True, False])
 
     player_health = handle_path_choice(player_health)
-
 
     treasure_obtained_in_combat = combat_encounter(player_health, monster_health, has_treasure)
 
@@ -161,4 +158,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    
