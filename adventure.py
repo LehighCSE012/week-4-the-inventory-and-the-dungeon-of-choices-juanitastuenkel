@@ -66,6 +66,7 @@ def check_for_treasure(has_treasure):
 
 def acquire_item(inventory, item):
     """ adds acquired item to list and print aquired item"""
+
     inventory.append(item) # Add more items to list as they are acquired in the room
     print(f"You acquired a {item}!")
     return inventory
@@ -158,6 +159,11 @@ def main():
     inventory.remove("Smelly sock") #removes specific item from inventory list
 
     display_inventory(inventory)
+
+    try:
+        dungeon_rooms[0] = ("A big hole", "gold coins", "puzzle", ("Puzzle solved!", "Nope!", -10))
+    except TypeError:
+        print("Error: Cannot modify a tuple as they are immutable!")
 
 if __name__ == "__main__":
     main()
