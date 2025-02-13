@@ -1,4 +1,4 @@
-"""Week 3 Coding Assignment. Juanita Stuenkel"""
+"""Used list methods in lines 70, 85, and 159"""
 
 import random
 
