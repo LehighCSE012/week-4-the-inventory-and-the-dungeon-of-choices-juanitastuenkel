@@ -68,11 +68,13 @@ def check_for_treasure(has_treasure):
         print("The monster did not have the treasure. You continue your journey.")
 
 def acquire_item(inventory, item):
+    """ adds acquired item to list and print aquired item"""
     inventory.append(item) # Add more items to list as they are acquired in the room
     print(f"You acquired a {item}!")
     return inventory
 
 def display_inventory(inventory):
+    """ displays inventory in a number list"""
     if len(inventory) > 0:
         print("Your inventory:")
         for index, item in enumerate(inventory):
@@ -81,6 +83,7 @@ def display_inventory(inventory):
         print("Your inventory is empty.")
 
 def enter_dungeon(player_health, inventory, dungeon_rooms):
+    """ runs through each dungeon room """
     try:
         dungeon_rooms[0] = ("A big hole", "Candy", "puzzle", ("Wow!", "Nope!", -10))
     except TypeError:
@@ -92,9 +95,10 @@ def enter_dungeon(player_health, inventory, dungeon_rooms):
         if dungeon_room [2] == "puzzle":
             print("You encounter a puzzle!")
             puzzle_input = input("Solve or skip the puzzle?")
+            successA = True
             if puzzle_input == "solve":
-                success = random.choice([True, False])
-            if success is True:
+                successA = random.choice([True, False])
+            if successA is True:
                 print(dungeon_room[3][0])
                 player_health += dungeon_room[3][2]
             else:
@@ -102,9 +106,10 @@ def enter_dungeon(player_health, inventory, dungeon_rooms):
         elif dungeon_room [2] == "trap":
             print("You see a potential trap!")
             trap_input = input("Disarm or bypass the trap?")
+            successB = True
             if trap_input == "Disarm":
-                success = random.choice([True, False])
-            if success is True:
+                successB = random.choice([True, False])
+            if successB is True:
                 print(dungeon_room[3][0])
             else:
                 print(dungeon_room[3][1])
@@ -122,8 +127,8 @@ def main():
     has_treasure = False
 
     dungeon_rooms = (
-    ("A dark cavern", "Smelly sock", "puzzle", ("You solved the puzzle!", "The did not solve the puzzle", -10)),
-    ("An abandoned mineshaft", None, "trap", ("You avoid the trap!", "You fell into trap!", -15)),
+    ("A dark cavern", "Smelly sock", "puzzle", ("You did it!", "You failed", -10)),
+    ("An old mineshaft", None, "trap", ("You avoid the trap!", "You fell!", -15)),
     ("A beautiful oasis", "healing potion", "none", None)
     )
 
