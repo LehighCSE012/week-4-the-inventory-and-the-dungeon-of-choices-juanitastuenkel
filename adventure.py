@@ -82,10 +82,10 @@ def display_inventory(inventory):
 
 def enter_dungeon(player_health, inventory, dungeon_rooms):
     try:
-        dungeon_rooms[0] = ("A big hole", "Candy", "puzzle", ("You solved the puzzle!", "The did not solve the puzzle", -10))
+        dungeon_rooms[0] = ("A big hole", "Candy", "puzzle", ("Wow!", "Nope!", -10))
     except TypeError:
         print("Error: Cannot modify a tuple as they are immutable!")
-    for dungeon_room in dungeon_rooms:   # in operator is used to go through each list within the tuple to use it
+    for dungeon_room in dungeon_rooms:   # used to go through each list within the tuple to use it
         print(dungeon_room[0])
         if dungeon_room[1] != None:
             acquire_item(inventory, dungeon_room[1])
@@ -93,8 +93,8 @@ def enter_dungeon(player_health, inventory, dungeon_rooms):
             print("You encounter a puzzle!")
             puzzle_input = input("Solve or skip the puzzle?")
             if puzzle_input == "solve":
-               success = random.choice([True, False])
-            if success == True:
+                success = random.choice([True, False])
+            if success is True:
                 print(dungeon_room[3][0])
                 player_health += dungeon_room[3][2]
             else:
@@ -104,16 +104,12 @@ def enter_dungeon(player_health, inventory, dungeon_rooms):
             trap_input = input("Disarm or bypass the trap?")
             if trap_input == "Disarm":
                 success = random.choice([True, False])
-            if success == True:
+            if success is True:
                 print(dungeon_room[3][0])
             else:
                 print(dungeon_room[3][1])
-        elif dungeon_room [2] == None:
+        elif dungeon_room [2] is None:
             print("There doesn't seem to be a challenge in this room. You move on.")
-        if player_health <= 0:
-                player_health = 0
-                print("You are barely alive!")
-        display_inventory(inventory)
     
     return (player_health, inventory)
    
@@ -146,12 +142,16 @@ def main():
     if player_health > 0:
         enter_dungeon(player_health, inventory, dungeon_rooms)
 
-    drop = int(input("If you want to get rid of an item, enter it's index! If not, enter 99."))
-    if drop < 99:
-        del inventory[drop]  # removes an item from the inventory list
-    elif drop == 99:
-        print("You continue will all of your goods.")
-    
+    if player_health <= 0:
+        player_health = 0
+        print("You are barely alive!")
+        display_inventory(inventory)
+
+    display_inventory(inventory)
+
+    print("You picked up a smelly sock along the way but throw it away.")
+    inventory.remove("Smelly sock") #removes specific item from inventory list
+
     display_inventory(inventory)
 
 if __name__ == "__main__":
