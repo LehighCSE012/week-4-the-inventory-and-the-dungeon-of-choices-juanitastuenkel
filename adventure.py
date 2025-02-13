@@ -2,8 +2,6 @@
 
 import random
 
-inventory = []
-
 def display_player_status(player_health):
     """prints player's health"""
     print(f"Your current health: {player_health}." )
@@ -57,7 +55,7 @@ def combat_encounter(player_health, monster_health, has_treasure=bool):
             print("Game OVer!")
         if monster_health <= 0:
             print("You defeated the monster!")
-            return has_treasure
+    return has_treasure
 
 def check_for_treasure(has_treasure):
     """checks for treasure"""
@@ -90,10 +88,10 @@ def enter_dungeon(player_health, inventory, dungeon_rooms):
         if dungeon_room [2] == "puzzle":
             print("You encounter a puzzle!")
             puzzle_input = input("Solve or skip the puzzle?")
-            successA = True
+            success_a = True
             if puzzle_input == "solve":
-                successA = random.choice([True, False])
-            if successA is True:
+                success_a = random.choice([True, False])
+            if success_a is True:
                 print(dungeon_room[3][0])
                 player_health += dungeon_room[3][2]
             else:
@@ -101,22 +99,23 @@ def enter_dungeon(player_health, inventory, dungeon_rooms):
         elif dungeon_room [2] == "trap":
             print("You see a potential trap!")
             trap_input = input("Disarm or bypass the trap?")
-            successB = True
+            success_b = True
             if trap_input == "Disarm":
-                successB = random.choice([True, False])
-            if successB is True:
+                success_b = random.choice([True, False])
+            if success_b is True:
                 print(dungeon_room[3][0])
             else:
                 print(dungeon_room[3][1])
                 player_health += dungeon_room[3][2]
         elif dungeon_room [2] is None:
-            print("There doesn't seem to be a challenge in this room. You move on.")
-    
+            print("There doesn't seem to be a challenge in this room.")
+
     return (player_health, inventory)
 
 def main():
     """runs program with other functions"""
 
+    inventory = []
     player_health = 100
     monster_health = 55
     has_treasure = False
