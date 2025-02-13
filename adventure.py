@@ -107,7 +107,7 @@ def enter_dungeon(player_health, inventory, dungeon_rooms):
                 print(dungeon_room[3][0])
             else:
                 print(dungeon_room[3][1])
-                player_health += dungeon_room[3][2]
+            player_health += dungeon_room[3][2]
         elif dungeon_room [2] == "none":
             print(dungeon_room[0])
             if dungeon_room[1]:
