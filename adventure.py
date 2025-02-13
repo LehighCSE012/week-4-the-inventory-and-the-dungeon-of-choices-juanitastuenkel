@@ -99,16 +99,22 @@ def enter_dungeon(player_health, inventory, dungeon_rooms):
         elif dungeon_room [2] == "trap":
             print("You see a potential trap!")
             trap_input = input("Disarm or bypass the trap?")
-            success_b = True
             if trap_input == "Disarm":
                 success_b = random.choice([True, False])
-            if success_b is True:
+            else:
+                success_b = True
+            if success_b:
                 print(dungeon_room[3][0])
             else:
                 print(dungeon_room[3][1])
                 player_health += dungeon_room[3][2]
-        elif dungeon_room [2] is None:
-            print("There doesn't seem to be a challenge in this room.")
+        elif dungeon_room [2] == "none":
+            print(dungeon_room[0])
+            if dungeon_room[1]:
+                acquire_item(inventory, dungeon_room[1])
+                print(f"You found a {dungeon_room[1]} in the room.")
+            else:
+                print("There doesn't seem to be a challenge in this room.")
 
     return (player_health, inventory)
 
