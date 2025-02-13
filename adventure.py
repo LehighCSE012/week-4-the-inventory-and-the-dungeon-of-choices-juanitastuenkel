@@ -2,7 +2,7 @@
 
 import random
 
-inventory = list[]
+inventory = []
 
 def display_player_status(player_health):
     """prints player's health"""
