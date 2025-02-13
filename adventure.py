@@ -83,35 +83,32 @@ def display_inventory(inventory):
 
 def enter_dungeon(player_health, inventory, dungeon_rooms):
     """ runs through each dungeon room """
-    try:
-        dungeon_rooms[0] = ("A big hole", "gold coins", "puzzle", ("Puzzle solved!", "Nope!", -10))
-    except TypeError:
-        print("Error: Cannot modify a tuple as they are immutable!")
     for dungeon_room in dungeon_rooms:   # used to go through each list within the tuple to use it
         print(dungeon_room[0])
         if dungeon_room[1] is not None:
             acquire_item(inventory, dungeon_room[1])
-        if dungeon_room [2] is "puzzle":
+        if dungeon_room [2] == "puzzle":
             print("You encounter a puzzle!")
             puzzle_input = input("Solve or skip the puzzle?")
             successA = True
-            if puzzle_input is "solve":
+            if puzzle_input == "solve":
                 successA = random.choice([True, False])
             if successA is True:
                 print(dungeon_room[3][0])
                 player_health += dungeon_room[3][2]
             else:
                 print(dungeon_room[3][1])
-        elif dungeon_room [2] is "trap":
+        elif dungeon_room [2] == "trap":
             print("You see a potential trap!")
             trap_input = input("Disarm or bypass the trap?")
             successB = True
-            if trap_input is "Disarm":
+            if trap_input == "Disarm":
                 successB = random.choice([True, False])
             if successB is True:
                 print(dungeon_room[3][0])
             else:
                 print(dungeon_room[3][1])
+                player_health += dungeon_room[3][2]
         elif dungeon_room [2] is None:
             print("There doesn't seem to be a challenge in this room. You move on.")
     
